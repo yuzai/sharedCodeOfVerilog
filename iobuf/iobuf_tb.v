@@ -6,7 +6,7 @@ reg I1,I2,I3,T1,T2,T3;
 wire O1,O2,O3,IO1,IO2,IO3;
 reg clk;
 
-top(
+top u1(
     .clk(clk),
     .z(T1),
     .din(I1),
@@ -21,7 +21,7 @@ top(
     .z3(T3),
     .din3(I3),
     .dout3(O3),
-    .dinout3(IO3),
+    .dinout3(IO3)
 );
 
 initial

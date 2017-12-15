@@ -1,4 +1,4 @@
-modulet top(
+module top(
     input clk,
     input z,
     input din,
@@ -13,7 +13,7 @@ modulet top(
     input z3,
     input din3,
     output dout3,
-    inout dinout3,
+    inout dinout3
 );
 //方法一
 reg dout;
@@ -28,7 +28,7 @@ begin
 end
 
 //方法二
-assign dinout2 = (!z2)din2:1'bz;
+assign dinout2 = (!z2)?din2:1'bz;
 assign dout2 = dinout2;
 
 //方法三
@@ -37,8 +37,6 @@ IOBUF iobuf(
     .O(dout3),
     .T(z3),
     .IO(dinout3)
-)
-
-
+);
 endmodule
 
