@@ -9,8 +9,6 @@
 #include "audio.h"
 
 #define UART_BASEADDR XPAR_PS7_UART_1_BASEADDR
-#define GPIO_BASE XPAR_GPIO_0_BASEADDR
-#define LED_CHANNEL 1
 
 unsigned char IicConfig(unsigned int DeviceIdPS);
 void AudilPllConfig();
