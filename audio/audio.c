@@ -11,7 +11,7 @@
 #define UART_BASEADDR XPAR_PS7_UART_1_BASEADDR
 
 unsigned char IicConfig(unsigned int DeviceIdPS);
-void AudilPllConfig();
+void AudioPllConfig();
 void AudioWriteToReg(unsigned char u8RegAddr,unsigned char u8Data);
 void AudioConfigureJacks();
 void LineinLineoutConfig();
@@ -20,7 +20,6 @@ void read_superpose_play();
 XIicPs Iic;
 
 int main(void){
-
     xil_printf("---------enter main fun-------\r\n");
 
     IicConfig(XPAR_XIICPS_0_DEVICE_ID);
@@ -33,7 +32,9 @@ int main(void){
 
     while(1){
         //循环采集 播放
-        read_superpose_play();
+//    	for(i=0;i<1000;i++)
+    		read_superpose_play();
+//    	xil_printf("%ld\r\n",end-start);
     }
     return 0;
 }
@@ -196,6 +197,8 @@ void AudioConfigureJacks()
 
     AudioWriteToReg(R65_CLOCK_ENABLE_0, 0x7F); //Enable clocks
     AudioWriteToReg(R66_CLOCK_ENABLE_1, 0x03); //Enable rest of clocks
+
+    LineinLineoutConfig();
 }
 
 /* ---------------------------------------------------------------------------- *
@@ -205,9 +208,9 @@ void AudioConfigureJacks()
  * ---------------------------------------------------------------------------- */
 void LineinLineoutConfig() {
 
-    AudioWriteToReg(R17_CONVERTER_CONTROL_0, 0x05);//48 KHz
-    AudioWriteToReg(R64_SERIAL_PORT_SAMPLING_RATE, 0x05);//48 KHz
-    AudioWriteToReg(R19_ADC_CONTROL, 0x13);
+    AudioWriteToReg(R17_CONVERTER_CONTROL_0, 0x00);//48 KHz 0x01:8k; 0x00 48k;
+    AudioWriteToReg(R64_SERIAL_PORT_SAMPLING_RATE, 0x00);//48 KHz 8k
+    AudioWriteToReg(R19_ADC_CONTROL, 0x11);
     AudioWriteToReg(R36_DAC_CONTROL_0, 0x03);
     AudioWriteToReg(R35_PLAYBACK_POWER_MANAGEMENT, 0x03);
     AudioWriteToReg(R58_SERIAL_INPUT_ROUTE_CONTROL, 0x01);
