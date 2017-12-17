@@ -4,7 +4,7 @@
 #include "xparameters.h"
 
 #define AUDIO_BASE XPAR_ZED_AUDIO_CTRL_0_BASEADDR
-
+#define IIC_SLAVE_ADDR 0x70
 #define IIC_SCLK_RATE 400000
 
 enum audio_regs{
@@ -60,7 +60,7 @@ enum audio_regs{
     R64_SERIAL_PORT_SAMPLING_RATE                   = 0xF8,
     R65_CLOCK_ENABLE_0                              = 0xF9,
     R66_CLOCK_ENABLE_1                              = 0xFA
-}
+};
 
 enum i2s_regs {
     I2S_DATA_RX_L_REG   = 0x00 + AUDIO_BASE,
@@ -68,4 +68,6 @@ enum i2s_regs {
     I2S_DATA_TX_L_REG   = 0x08 + AUDIO_BASE,
     I2S_DATA_TX_R_REG   = 0x0c + AUDIO_BASE,
     I2S_STATUS_REG      = 0x10 + AUDIO_BASE,
-}
+};
+
+#endif
