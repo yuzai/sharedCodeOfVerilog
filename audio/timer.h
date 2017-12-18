@@ -18,6 +18,7 @@
 
 //static XAdcPs  XADCMonInst; //XADC
 
+extern int count;
 static XScuGic Intc; //GIC
 
 static XScuTimer Timer;//timer

@@ -81,5 +81,7 @@ void TimerIntrHandler(void *CallBackRef){
     sec++;
 
     xil_printf(" %d Second\n\r",sec);  //每秒打印输出一次
+    xil_printf(" one sec executed: %d times\r\n",count);
+    count = 0;
 
 }

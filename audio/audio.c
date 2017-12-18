@@ -7,6 +7,7 @@
 #include "xuartps.h"
 #include "stdlib.h"
 #include "audio.h"
+#include "timer.h"
 
 #define UART_BASEADDR XPAR_PS7_UART_1_BASEADDR
 
@@ -19,21 +20,23 @@ void read_superpose_play();
 
 XIicPs Iic;
 
+int count;
 int main(void){
+	count=0;
     xil_printf("---------enter main fun-------\r\n");
-
     IicConfig(XPAR_XIICPS_0_DEVICE_ID);
 
     AudioPllConfig();
 
     AudioConfigureJacks();
+    initInterruptSystem();
 
     xil_printf("--------adau1761 configured--------\r\n");
 
     while(1){
         //循环采集 播放
 //    	for(i=0;i<1000;i++)
-    		read_superpose_play();
+        read_superpose_play();
 //    	xil_printf("%ld\r\n",end-start);
     }
     return 0;
@@ -43,6 +46,7 @@ void read_superpose_play(void){
     u32 in_left,in_right,out_left,out_right;
 
     while(!XUartPs_IsReceiveData(UART_BASEADDR)){
+    	count++;
         // 采集到的左右声道的数据
         in_left = Xil_In32(I2S_DATA_RX_L_REG);
         in_right = Xil_In32(I2S_DATA_RX_R_REG);
