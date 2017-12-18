@@ -7,6 +7,13 @@
 #define IIC_SLAVE_ADDR 0x70
 #define IIC_SCLK_RATE 400000
 
+void AudioPllConfig();
+void AudioWriteToReg(unsigned char u8RegAddr,unsigned char u8Data);
+void AudioConfigureJacks();
+void LineinLineoutConfig();
+void read_superpose_play();
+void initAudio();
+
 enum audio_regs{
     R0_CLOCK_CONTROL                                = 0x00,
     R1_PLL_CONTROL                                  = 0x02,
@@ -69,5 +76,4 @@ enum i2s_regs {
     I2S_DATA_TX_R_REG   = 0x0c + AUDIO_BASE,
     I2S_STATUS_REG      = 0x10 + AUDIO_BASE,
 };
-
 #endif

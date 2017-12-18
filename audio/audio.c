@@ -12,16 +12,11 @@
 #define UART_BASEADDR XPAR_PS7_UART_1_BASEADDR
 
 unsigned char IicConfig(unsigned int DeviceIdPS);
-void AudioPllConfig();
-void AudioWriteToReg(unsigned char u8RegAddr,unsigned char u8Data);
-void AudioConfigureJacks();
-void LineinLineoutConfig();
-void read_superpose_play();
 
 XIicPs Iic;
 
 int count;
-int main(void){
+void initAudio(){
 	count=0;
     xil_printf("---------enter main fun-------\r\n");
     IicConfig(XPAR_XIICPS_0_DEVICE_ID);
@@ -29,17 +24,7 @@ int main(void){
     AudioPllConfig();
 
     AudioConfigureJacks();
-    initInterruptSystem();
-
     xil_printf("--------adau1761 configured--------\r\n");
-
-    while(1){
-        //循环采集 播放
-//    	for(i=0;i<1000;i++)
-        read_superpose_play();
-//    	xil_printf("%ld\r\n",end-start);
-    }
-    return 0;
 }
 
 void read_superpose_play(void){
