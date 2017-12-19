@@ -1,16 +1,12 @@
 module iis_read_logic(
     input clk_100m,
-    input rst,
+    input rst_n,
     input sdata_i,
     output bclk,
     output lrclk,
     output [23:0]ldata_l,
     output [23:0]rdata_l
 );
-
-//get the true rst signal,zynq开发板默认按键低电平
-wire rst_n;
-assign rst_n = ~rst;
 
 //产生bclk和lrclk信号：bclk:3M 100/32 lrclk:48k 100/2048
 reg [4:0]count1;
