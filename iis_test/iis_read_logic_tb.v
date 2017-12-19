@@ -8,6 +8,13 @@ wire lrclk;
 wire [23:0]ldata_l;
 wire [23:0]rdata_l;
 
+bclk_lrclk_logic clk_generate(
+    .clk_100m(clk_100m),
+    .rst_n(rst_n),
+    .bclk(bclk),
+    .lrclk(lrclk)
+);
+
 iis_read_logic test(
     .clk_100m(clk_100m),
     .rst_n(rst_n),
