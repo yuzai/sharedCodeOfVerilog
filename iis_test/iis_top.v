@@ -4,7 +4,10 @@ module iis_top(
     input sdata_i,
     output sdata_o,
     output bclk,
-    output lrclk
+    output lrclk,
+
+    input [23:0]sin_data,
+    output [10:0]address    
 );
 
 wire rst_n;
@@ -30,15 +33,21 @@ iis_read_logic iis_read_u1(
     .rdata_l(rdata)
 );
 
+read_sin read_sin_u1(
+    .clk_fs(lrclk),  //fs = 48khz
+    .rst_n(rst_n), 
+    .address(address)
+);
+
 iis_write_logic iis_write_u1(
     .clk_100m(clk_100m),
     .rst_n(rst_n),
     .bclk(bclk),
     .lrclk(lrclk),
-    .ldata(ldata),
+    .ldata(sin_data),
     .rdata(rdata),
     .en(1'b1),
-    sdata_o(sdata_o)
+    .sdata_o(sdata_o)
 );
 
 endmodule
